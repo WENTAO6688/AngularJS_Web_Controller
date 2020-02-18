@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Data Management</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+<style>
+    .input-info{color:blue;}
+</style>
+</head>
+
+
+<body ng-app="app">
+<div id='out' ng-controller="ctrl">
+    <div>
+        <input type="text" placeholder="Please enter the information" ng-model="ipt1">
+        <span class="input-group-btn">
+            <button type="button" ng-click="add()">Add</button>
+        </span>
+    </div>
+
+    <h2>Basic data: </h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>INFO</th>
+            <th>OPERATION</th>
+            <th>OPERATION</th>
+        </tr>
+        <tr ng-repeat="(index, x) in list">
+            <td>{{index + 1}}</td>
+            <td>{{x}}</td>
+            <td><button class="btn btn-danger btn-sm" ng-click="del(index)">DELETE</button></td>
+            <td><button class="btn btn-default btn-sm" ng-click="resize(index)">RESIZE</button></td>
+        </tr>
+    </table>
+
+</div>
+</body>
+
+<script type="text/Javascript">
+    angular.module('app', []).controller('ctrl',function($scope){
+    $scope.list = []
+    $scope.add = function(){
+        $scope.list.push($scope.ipt1)
+        $scope.ipt1 = ''
+        }
+    $scope.del = function(a){
+        $scope.list.splice(a, 1)
+        }
+    $scope.resize = function(a){
+        var str = prompt('Please enter the new information','')
+        if (str==''){
+            return false
+        }else{
+        $scope.list[a] = str
+        }
+
+        }
+    })
+</script>
+</html>
